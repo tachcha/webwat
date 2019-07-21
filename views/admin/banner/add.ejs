@@ -1,0 +1,54 @@
+<%- include('../../layout/header') %>
+<div class="container-fluid">
+  <h1>เพิ่มแบนเนอร์</h1>
+  <div class="card">
+    <div class="card-header">
+      กรุณากรอกข้อมูลให้ครบถ้วน
+    </div>
+    <div class="card-body">
+      <form action="/admin/banner/create" enctype="multipart/form-data" method="POST" role="form">
+        <div class="form-group">
+          <label for="inputTitle">หัวข้อแบนเนอร์</label>
+          <input
+            type="text"
+            name="title"
+            id="inputTitle"
+            required
+            minlength="3"
+            value=""
+            placeholder="กรอกหัวข้อ"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="inputLink">ลิงค์ * ถ้าไม่มีให้เว้นว่างไว้ </label>
+          <input
+            type="text"
+            name="link"
+            id="inputLink"
+            value=""
+            placeholder="กรอกลิงค์"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="inputFile"
+            >ไฟล์รูปภาพ * รูปภาพแบนเนอร์ขนาดที่เหมาะสมคือ 1200x400 px
+          </label>
+          <br />
+          <input
+            type="file"
+            name="image"
+            id="inputFile"
+            required
+            accept="image/*"
+          />
+        </div>
+        <button class="btn btn-primary">
+          <i class="fa fa-save"></i> บันทึก
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('../../layout/footer') %> <%- include('../../layout/end') %>

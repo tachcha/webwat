@@ -1,0 +1,58 @@
+<%- include('../../layout/header') %>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <h1 class="h3 mb-4 text-gray-800">หมวดหมู่</h1>
+  <div class="card">
+    <div class="card-header">
+      รายการหมวดหมู่
+      <span class="float-right">
+        <a class="btn btn-sm btn-primary" href="/admin/category/add"
+          ><i class="fa fa-plus"></i> เพิ่มหมวดหมู่ใหม่</a
+        >
+      </span>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ชื่อหมวดหมู่</th>
+            <th class="text-right">จัดการ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% categories.map((category,index) => { %>
+          <tr>
+            <td><%= index+1 %></td>
+            <td>
+              <%= category.name %>
+            </td>
+
+            <td class="text-right">
+              <div class="btn-group" role="group">
+                <a
+                  class="btn btn-warning btn-sm"
+                  href="/admin/category/edit/<%= category.id %>"
+                >
+                  <i class="fa fa-edit"></i>
+                </a>
+                <a
+                  onclick="return confirm('คุณแน่ในหรือจะลบข้อมูลนี้ ?') ? true : false"
+                  class="btn btn-danger btn-sm"
+                  href="/admin/category/delete/<%= category.id %>"
+                >
+                  <i class="fa fa-trash"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- /.container-fluid -->
+
+<%- include('../../layout/footer') %> <%- include('../../layout/end') %>

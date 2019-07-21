@@ -1,0 +1,68 @@
+<%- include('../../layout/header') %>
+<div class="container-fluid">
+  <h1>แบนเนอร์</h1>
+  <div class="card">
+    <div class="card-header">
+      รายการแบนเนอร์
+      <span class="float-right"
+        ><a href="/admin/banner/add" class="btn btn-sm btn-primary"
+          ><i class="fa fa-plus"></i> เพิ่มแบนเนอร์</a
+        ></span
+      >
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>รูป</th>
+            <th>หัวข้อ</th>
+            <th>สถานะ</th>
+            <th>ผู้บันทึก</th>
+            <th class="text-right">จัดการ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% banners.map((banner, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td>
+              <a
+                href="<%= banner.link ? banner.link : '#' %>"
+                target="<%= banner.link ? '_blank' : '_self' %>"
+                ><img
+                  src="<%= banner.path %>"
+                  width="150"
+                  alt="<%= banner.title %>"
+              /></a>
+            </td>
+            <td><%= banner.title %></td>
+            <td>
+              <%- banner.status == 1 ? `<span class="text-success"
+                >เปิดใช้งานอยู่</span
+              >` : `<span class="text-danger">ปิดใช้งานอยู่</span>` %>
+            </td>
+            <td><%= banner.user_name %></td>
+            <td class="text-right">
+              <div class="button-group">
+                <a
+                  href="/admin/banner/edit/<%= banner.id %>"
+                  class="btn btn-sm btn-warning"
+                  ><i class="fa fa-edit"></i
+                ></a>
+                <a
+                  href="/admin/banner/delete/<%= banner.id %>"
+                  onclick="return confirm('ต้องการลบข้อมูลนี้ออกจริงหรือไม่ ?')"
+                  class="btn btn-sm btn-danger"
+                  ><i class="fa fa-trash"></i
+                ></a>
+              </div>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%- include('../../layout/footer') %> <%- include('../../layout/end') %>

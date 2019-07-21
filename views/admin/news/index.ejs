@@ -1,0 +1,68 @@
+<%- include('../../layout/header') %>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <h1 class="h3 mb-4 text-gray-800">ข่าวสาร</h1>
+  <div class="card">
+    <div class="card-header">
+      รายการข่าว
+      <span class="float-right">
+        <a class="btn btn-sm btn-primary" href="/admin/news/add"
+          ><i class="fa fa-plus"></i> เพิ่มข่าวใหม่</a
+        >
+      </span>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>หัวเรื่อง</th>
+            <th>หมวดหมู่</th>
+            <th>ผู้เขียน</th>
+            <th class="text-right">จัดการ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% news.map((item, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td>
+              <%= item.title %>
+            </td>
+            <td><%= item.category_name %></td>
+            <td><%= item.user_name %></td>
+            <td class="text-right">
+              <div class="btn-group" role="group">
+                <a
+                  class="btn btn-info btn-sm"
+                  target="_blank"
+                  href="/admin/news/<%= item.id %>"
+                >
+                  <i class="fa fa-search"></i>
+                </a>
+                <a
+                  class="btn btn-warning btn-sm"
+                  href="/admin/news/edit/<%= item.id %>"
+                >
+                  <i class="fa fa-edit"></i>
+                </a>
+                <a
+                  onclick="return confirm('แน่ใจหรือไม่ที่จะลบข้อมูลนี้ ?')"
+                  class="btn btn-danger btn-sm"
+                  href="/admin/news/delete/<%= item.id %>"
+                >
+                  <i class="fa fa-trash"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- /.container-fluid -->
+
+<%- include('../../layout/footer') %> <%- include('../../layout/end') %>

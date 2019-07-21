@@ -1,0 +1,14 @@
+{
+    "version": 2,
+    "name": "webwat",
+    "builds": [
+        {
+            "src": "**/*.js",
+            "use": "@now/node"
+        },
+        {
+            "src": "*.css",
+            "use": "@now/static"
+        }
+    ]
+}

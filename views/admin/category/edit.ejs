@@ -1,0 +1,33 @@
+<%- include('../../layout/header') %>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <h1 class="h3 mb-4 text-gray-800">เพิ่มหมวดหมู่ใหม่</h1>
+  <div class="card">
+    <div class="card-header">
+      เพิ่มหมวดหมู่ใหม่
+    </div>
+    <div class="card-body">
+      <form action="/admin/category/update/<%= category.id %>" method="POST">
+        <div class="form-group">
+          <label for="inputName">ชื่อหมวดหมู่ </label>
+          <input
+            type="text"
+            name="name"
+            value="<%= category.name %>"
+            placeholder="ชื่อหมวดหมู่"
+            required
+            minlength="3"
+            class="form-control"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm">
+          <i class="fa fa-save"></i> บันทึก
+        </button>
+      </form>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+
+  <%- include('../../layout/footer') %> <%- include('../../layout/end') %>
+</div>

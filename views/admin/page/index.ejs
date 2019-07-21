@@ -1,0 +1,57 @@
+<%- include('../../layout/header') -%>
+<div class="container-fluid">
+  <h1>หน้า</h1>
+  <div class="card">
+    <div class="card-header">
+      รายการหน้า
+      <span class="float-right"
+        ><a href="/admin/page/add" class="btn btn-sm btn-primary"
+          ><i class="fa fa-plus"></i> เพิ่มหน้าใหม่</a
+        ></span
+      >
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <td>#</td>
+            <td>หัวข้อ</td>
+            <td>ผู้เขียน</td>
+            <td class="text-right">จัดการ</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% pages.map((page, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= page.title %></td>
+            <td><%= page.user_name %></td>
+            <td class="text-right">
+              <div class="button-group">
+                <a
+                  href="/page/<%= page.id %>"
+                  target="_blank"
+                  class="btn btn-sm btn-info"
+                  ><i class="fa fa-search"></i
+                ></a>
+                <a
+                  href="/admin/page/edit/<%= page.id %>"
+                  class="btn btn-sm btn-warning"
+                  ><i class="fa fa-edit"></i
+                ></a>
+                <a
+                  href="/admin/page/delete/<%= page.id %>"
+                  onclick="return confirm('ต้องการลบข้อมูลนี้ออกจริงหรือไม่ ?')"
+                  class="btn btn-sm btn-danger"
+                  ><i class="fa fa-trash"></i
+                ></a>
+              </div>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%- include('../../layout/footer') -%> <%- include('../../layout/end') -%>

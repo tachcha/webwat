@@ -1,0 +1,64 @@
+<%- include('../../layout/header') -%>
+<div class="container-fluid">
+  <h1>ผู้ใช้งาน</h1>
+  <div class="card">
+    <div class="card-header">
+      รายการผู้ใช้งาน
+      <span class="float-right"
+        ><a class="btn btn-sm btn-primary" href="/admin/user/add"
+          ><i class="fa fa-plus"></i> เพิ่มผู้ใช้งาน</a
+        ></span
+      >
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>รูป</th>
+            <th>ชื่อ - สกุล</th>
+            <th>สิทธิ์</th>
+            <th>ชื่อผู้ใช้งาน</th>
+            <th>อีเมล์</th>
+            <th class="text-right pr-md-5">จัดการ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.map((user, index) => { %>
+          <tr>
+            <td><%= index+1 %></td>
+            <td>
+              <img src="<%= user.avatar %>" alt="<%= user.name %>" width="32" />
+            </td>
+            <td><%= user.name %></td>
+            <td><%= user.role_name %></td>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td class="text-right">
+              <div class="btn-group">
+                <a class="btn btn-sm btn-info" href="#modal">
+                  <i class="fa fa-search"></i>
+                </a>
+                <a
+                  class="btn btn-sm btn-warning"
+                  href="/admin/user/edit/<%= user.id %>"
+                >
+                  <i class="fa fa-edit"></i>
+                </a>
+                <a
+                  onclick="return confirm('แน่ใจหรือไม่ที่จะลบข้อมูลนี้ออก ?')"
+                  class="btn btn-sm btn-danger"
+                  href="/admin/user/delete/<%= user.id %>"
+                >
+                  <i class="fa fa-trash"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%- include('../../layout/footer') -%> <%- include('../../layout/end') -%>

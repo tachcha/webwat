@@ -1,0 +1,119 @@
+<%- include('../../layout/header') %>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <h1 class="h3 mb-4 text-gray-800">เพิ่มหน้าใหม่</h1>
+  <div class="card">
+    <div class="card-header">
+      เพิ่มหน้าใหม่
+    </div>
+    <div class="card-body">
+      <form
+        action="/admin/page/create"
+        enctype="multipart/form-data"
+        method="POST"
+      >
+        <div class="form-group">
+          <label for="inputTitle">หัวข้อหน้า</label>
+          <input
+            type="text"
+            name="title"
+            id="inputTitle"
+            required
+            minlength="3"
+            placeholder="กรอกหัวข้อหน้า..."
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="inputThumbnail">รูปประจำหน้า</label> <br />
+          <input
+            type="file"
+            accept="image/*"
+            name="thumbnail"
+            id="inputThumbnail"
+          />
+        </div>
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            name="detail"
+            id="summernote"
+            cols="30"
+            rows="10"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          <i class="fa fa-save"></i> บันทึก
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- /.container-fluid -->
+
+<%- include('../../layout/footer') %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote-cleaner@1.0.0/summernote-cleaner.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $("#summernote").summernote({
+      height: 250,
+      callbacks: {
+        onImageUpload: function(files) {
+          var data = new FormData();
+          data.append("file", files[0]);
+          axios.post("/api/imageUpload", data).then(function(result) {
+            var imgNode = result.data;
+            $("#summernote").summernote("insertImage", imgNode);
+          });
+        }
+      },
+      placeholder: "โปรดกรอกรายละเอียดที่นี่...",
+      toolbar: [
+        ["style", ["style"]],
+        ["font", ["bold", "italic", "underline", "clear"]],
+        ["fontname", ["fontname"]],
+        ["color", ["color"]],
+        ["para", ["ul", "ol", "paragraph"]],
+        ["height", ["height"]],
+        ["table", ["table"]],
+        ["insert", ["picture", "video", "media", "link", "hr"]],
+        ["view", ["fullscreen", "codeview"]],
+        ["cleaner", ["cleaner"]] // The Button
+      ],
+      cleaner: {
+        action: "both", // both|button|paste 'button' only cleans via toolbar button, 'paste' only clean when pasting content, both does both options.
+        newline: "<br>", // Summernote's default is to use '<p><br></p>'
+        notStyle: "position:absolute;top:0;left:0;right:0", // Position of Notification
+        icon: '<i class="note-icon">ล้างรูปแบบจาก word</i>',
+        keepHtml: false, // Remove all Html formats
+        keepOnlyTags: [
+          "<p>",
+          "<br>",
+          "<ul>",
+          "<li>",
+          "<b>",
+          "<strong>",
+          "<i>",
+          "<a>"
+        ], // If keepHtml is true, remove all tags except these
+        keepClasses: false, // Remove Classes
+        badTags: [
+          "style",
+          "script",
+          "applet",
+          "embed",
+          "noframes",
+          "noscript",
+          "html"
+        ], // Remove full tags with contents
+        badAttributes: ["style", "start"], // Remove attributes from remaining tags
+        limitChars: false, // 0/false|# 0/false disables option
+        limitDisplay: "both", // text|html|both
+        limitStop: false // true/false
+      }
+    });
+  });
+</script>
+<%- include('../../layout/end') %>
